@@ -172,7 +172,7 @@ xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
 </xsl:otherwise></xsl:choose><xsl:if test="schema_1_0:Parameter | schema_1_1:Parameter | schema_1_2:Parameter">	[params release];
 
 </xsl:if>
-<xsl:choose><xsl:when test="@m:HttpMethod">	return [self executeServiceOperation:aQuery httpMethod:@"<xsl:value-of select="@m:HttpMethod"/>" isReturnTypeCollection:<xsl:choose><xsl:when test="contains(@ReturnType, 'Collection')">YES</xsl:when><xsl:otherwise>NO</xsl:otherwise></xsl:choose>];
+<xsl:choose><xsl:when test="@m:HttpMethod"><xsl:if test="@ReturnType">	return</xsl:if> [self executeServiceOperation:aQuery httpMethod:@"<xsl:value-of select="@m:HttpMethod"/>" isReturnTypeCollection:<xsl:choose><xsl:when test="contains(@ReturnType, 'Collection')">YES</xsl:when><xsl:otherwise>NO</xsl:otherwise></xsl:choose>];
 </xsl:when><xsl:otherwise>	return [self executeServiceOperation:aQuery httpMethod:@"GET" isReturnTypeCollection:<xsl:choose><xsl:when test="contains(@ReturnType, 'Collection')">YES</xsl:when><xsl:otherwise>NO</xsl:otherwise></xsl:choose>];
 </xsl:otherwise></xsl:choose>}
 </xsl:for-each>
